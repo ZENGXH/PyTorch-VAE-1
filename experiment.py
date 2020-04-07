@@ -144,9 +144,9 @@ class VAEXperiment(pl.LightningModule):
                              download=False)
         elif self.params['dataset'] == 'mnist':
             dataset = MNIST(root = self.params['data_path'],
-                             split = "train",
+                             train=True,
                              transform=transform,
-                             download=False)
+                             download=True)
 
         self.num_train_imgs = len(dataset)
         return DataLoader(dataset,
@@ -169,9 +169,9 @@ class VAEXperiment(pl.LightningModule):
             self.num_val_imgs = len(self.sample_dataloader)
         elif self.params['dataset'] == 'mnist':
             dataset = MNIST(root = self.params['data_path'],
-                             split = "test",
+                             train=False,
                              transform=transform,
-                             download=False)
+                             download=True)
             self.sample_dataloader = DataLoader(dataset, batch_size= 144,
                                                  shuffle = True,
                                                  drop_last=True)
